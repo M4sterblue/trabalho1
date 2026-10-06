@@ -41,8 +41,12 @@ fun noRepeats(s: String): Boolean = true
  * @param result A string a verificar
  * @return true se todos os caracteres forem iguais a CORRECT, false caso contrário
  */
-fun allCorrect(result: String): Boolean = false
-
+fun allCorrect(result: String): Boolean {
+    val correto = "+++++"
+    return if (result == correto) {
+         true
+    } else false
+}
 /**
  * Lê uma palavra introduzida pelo utilizador convertida para maiúsculas.
  * Só retorna quando a palavra lida tem o comprimento correto
@@ -67,4 +71,4 @@ fun readGuess(length: Int): String {
  * @return A string do resultado com os caracteres CORRECT, WRONG e SWAPPED
  * Exemplo: getResult("CARRO", "CRAVO") == "+##_+"
  */
-fun getResult(secret: String, guess: String): String = "+___#"
+fun getResult(secret: String, guess: String): String = "-----"
