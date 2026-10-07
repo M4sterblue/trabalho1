@@ -35,17 +35,15 @@ val words = listOf(
  * @return true se não houver caracteres repetidos, false caso contrário
  */
 fun noRepeats(s: String): Boolean {
-    // Percorre cada letra da palavra
     for (i in 0..<s.length) {
-        // Para cada letra 'i', compara com todas as letras que vêm DEPOIS dela
+
         for (j in (i + 1)..<s.length) {
             if (s[i] == s[j]) {
-                return false // Encontrou uma letra repetida, logo falha imediatamente
+                return false
             }
         }
     }
 
-    // Se chegou até aqui, é porque testou tudo e não encontrou nenhuma repetição
     return true
 }
 
@@ -57,7 +55,7 @@ fun noRepeats(s: String): Boolean {
 fun allCorrect(result: String): Boolean {
     for (i in 0..<result.length) {
         if (result[i] != CORRECT) {
-            return false // Se encontrar UM único caractere diferente de '+', não está tudo correto
+            return false
         }
     }
     return true
@@ -89,16 +87,17 @@ fun readGuess(length: Int): String {
 fun getResult(secret: String, guess: String): String {
     var result = ""
 
-    // Percorre cada letra da tentativa
     for (i in 0..<guess.length) {
         val letra = guess[i]
 
-        if (letra == secret[i]) {
-            result += CORRECT // 1. Letra na posição exata
-        } else {
-            // 2. Letra na posição errada. Vamos contar para ver se ganha SWAPPED
+        // Verifica se a letra na posição atual (i) da tentativa é igual à letra na mesma posição (i) da palavra secreta. Se for, adiciona '+' ao resultado
 
-            // Conta quantas vezes a letra existe no total da palavra secreta
+        if (letra == secret[i]) {
+            result += CORRECT
+        } else {
+
+            // Conta quantas vezes a letra atual da tentativa existe dentro da palavra secret
+
             var totalNaSecreta = 0
             for (j in 0..<secret.length) {
                 if (secret[j] == letra) {
@@ -106,7 +105,8 @@ fun getResult(secret: String, guess: String): String {
                 }
             }
 
-            // Conta quantas vezes essa mesma letra já está na posição CORRETA
+            // Conta quantas vezes a letra atual da tentativa já acertou na posição exata ao longo da palavra
+
             var totalCorretas = 0
             for (j in 0..<secret.length) {
                 if (guess[j] == secret[j] && guess[j] == letra) {
@@ -114,20 +114,21 @@ fun getResult(secret: String, guess: String): String {
                 }
             }
 
-            // Conta quantas vezes já adivinhámos esta letra nas posições ANTERIORES da nossa tentativa
+            // Conta quantas vezes a letra atual já apareceu em posições ANTERIORES da nossa tentativa (e que não estavam certas)
+
             var totalAnteriores = 0
-            for (j in 0..<i) { // Nota: vai apenas de 0 até à posição atual 'i'
+            for (j in 0..<i) {
                 if (guess[j] != secret[j] && guess[j] == letra) {
                     totalAnteriores++
                 }
             }
 
-            // A matemática final:
-            // Se o total que existe na secreta for MAIOR que as letras que já "gastámos", então ainda tem direito a SWAPPED.
+            // Se ainda sobrarem ocorrências da letra na palavra secreta que não foram gastas, atribui SWAPPED, caso contrário, atribui WRONG
+
             if (totalNaSecreta > totalCorretas + totalAnteriores) {
                 result += SWAPPED
             } else {
-                result += WRONG // Já gastámos as letras todas, por isso é apenas WRONG
+                result += WRONG
             }
         }
     }
