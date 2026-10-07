@@ -114,7 +114,7 @@ fun getResult(secret: String, guess: String): String {
                 }
             }
 
-            // Conta quantas vezes a letra atual já apareceu em posições ANTERIORES da nossa tentativa (e que não estavam certas)
+            // Conta quantas vezes a letra atual já apareceu em posições ANTERIORES da nossa tentativa, e que não estavam certas)
 
             var totalAnteriores = 0
             for (j in 0..<i) {
