@@ -4,7 +4,7 @@ const val CORRECT = '+'
 const val SWAPPED = '#'
 
 fun main() {
-    val secret = words.random() // words.filter{ noRepeats(it) }.random()
+    val secret = words.random() // words.filter{ noRepeats(it) }.random() (fun noRepeats()).
     println("Adivinhar uma palavra com ${secret.length} letras em $MAX_ATTEMPTS tentativas.")
     var attempts = 1
     do {
@@ -29,11 +29,7 @@ val words = listOf(
     "GENTE", "GRUPO", "JOVEM", "MASSA", "NOITE", "PAPEL", "RAPAZ", "TERRA"
 )
 
-/**
- * Verifica se a string indicada não contém caracteres repetidos
- * @param s A string a verificar
- * @return true se não houver caracteres repetidos, false caso contrário
- */
+/*
 fun noRepeats(s: String): Boolean {
     for (i in 0..<s.length) {
 
@@ -46,12 +42,8 @@ fun noRepeats(s: String): Boolean {
 
     return true
 }
+*/
 
-/**
- * Verifica se todos os caracteres da string result são iguais a CORRECT
- * @param result A string a verificar
- * @return true se todos os caracteres forem iguais a CORRECT, false caso contrário
- */
 fun allCorrect(result: String): Boolean {
     for (i in 0..<result.length) {
         if (result[i] != CORRECT) {
@@ -60,15 +52,7 @@ fun allCorrect(result: String): Boolean {
     }
     return true
 }
-/**
- * Lê uma palavra introduzida pelo utilizador convertida para maiúsculas.
- * Só retorna quando a palavra lida tem o comprimento correto
- * e só contém letras maiúsculas.
- * Sugere a introdução da palavra com a mensagem "Palavra: ".
- * Cada palavra não aceite provoca a mensagem "Palavra inválida."
- * @param length O comprimento da palavra a ler
- * @return A palavra lida em maiúsculas
- */
+
 fun readGuess(length: Int): String {
     val currentguess: String = readln().uppercase()
     return if (currentguess.length == length) {
@@ -77,13 +61,6 @@ fun readGuess(length: Int): String {
         "Palavra inválida"
 }
 
-/**
- * Obtém o resultado da tentativa com base na palavra secreta e na tentativa do utilizador
- * @param secret A palavra secreta
- * @param guess A tentativa do utilizador
- * @return A string do resultado com os caracteres CORRECT, WRONG e SWAPPED
- * Exemplo: getResult("CARRO", "CRAVO") == "+##_+"
- */
 fun getResult(secret: String, guess: String): String {
     var result = ""
 
